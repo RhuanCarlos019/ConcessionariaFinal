@@ -1,33 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concessionária</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
             background-color: #f4f4f4;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         header {
             text-align: center;
             margin-bottom: 20px;
         }
-        header img {
-            width: 100%;
-            max-width: 800px;
-        }
         h1 {
             color: #333;
         }
         nav ul {
-            list-style-type: none;
             padding: 0;
             margin: 0;
             text-align: center;
@@ -49,6 +38,7 @@
             background-color: #f9f9f9;
             padding: 20px;
             border-radius: 5px;
+            margin-top: 20px;
         }
         footer {
             text-align: center;
@@ -57,25 +47,25 @@
             border-top: 1px solid #ccc;
         }
     </style>
-    <title>Concessionária</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container mt-5 p-4 bg-white shadow">
         <header>
             <h1>Bem-vindo à Concessionária</h1>
         </header>
         <nav>
-            <ul>
-                <li><a href="listarClientes.php">Gerenciar Clientes</a></li>
-                <li><a href="listarAlugueis.php">Gerenciar Aluguéis</a></li>
-                <li><a href="listarFuncionarios.php">Gerenciar Funcionários</a></li>
-                <li><a href="Desafios.php">Desafios</a></li>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="listarClientes.php" class="btn btn-link">Gerenciar Clientes</a></li>
+                <li class="list-inline-item"><a href="listarAlugueis.php" class="btn btn-link">Gerenciar Aluguéis</a></li>
+                <li class="list-inline-item"><a href="listarFuncionarios.php" class="btn btn-link">Gerenciar Funcionários</a></li>
+                <li class="list-inline-item"><a href="Desafios.php" class="btn btn-link">Desafios</a></li>
             </ul>
-            <img src="/img/conce.jfif" alt="Banner da Concessionária">
-            <img src="/img/conce.jfif" alt="Banner da Concessionária">
-            <img src="/img/conce.jfif" alt="Banner da Concessionária">
-            <img src="/img/conce.jfif" alt="Banner da Concessionária">
-            <img src="/img/conce.jfif" alt="Banner da Concessionária">
+            <div class="d-flex justify-content-center flex-wrap">
+                <img src="/img/conce.jfif" class="img-fluid m-2" alt="Banner da Concessionária">
+                <img src="/img/conce.jfif" class="img-fluid m-2" alt="Banner da Concessionária">
+                <img src="/img/conce.jfif" class="img-fluid m-2" alt="Banner da Concessionária">
+                <img src="/img/conce.jfif" class="img-fluid m-2" alt="Banner da Concessionária">
+            </div>
         </nav>
         <section>
             <div class="info">
@@ -88,5 +78,8 @@
             <p>&copy; 2024 Concessionária. Todos os direitos reservados.</p>
         </footer>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
