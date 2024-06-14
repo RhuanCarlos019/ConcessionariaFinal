@@ -3,7 +3,7 @@
 include_once 'db.php';
 
 // Consulta para calcular a média de dias que os carros ficam alugados
-$sql = "SELECT AVG(DATEDIFF(data_fim, data_inicio)) AS media_dias_aluguel
+$sql = "SELECT AVG(EXTRACT(DAY FROM (data_fim - data_inicio))) AS media_dias_aluguel
         FROM alugueis";
 
 $result = $pdo->query($sql);
@@ -51,7 +51,7 @@ $media_dias_aluguel = $row['media_dias_aluguel'];
 <body>
     <div class="container">
         <h1>Média de Dias que os Carros Ficam Alugados</h1>
-        <p><?php echo "A média de dias que os carros ficam alugados é de aproximadamente $media_dias_aluguel dias."; ?></p>
+        <p><?php echo "A média de dias que os carros ficam alugados é de aproximadamente " . round($media_dias_aluguel, 2) . " dias."; ?></p>
     </div>
 </body>
 </html>

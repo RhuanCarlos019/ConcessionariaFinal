@@ -8,7 +8,7 @@ $data_inicio = '2024-01-01';
 $data_fim = '2024-12-31';
 
 // Consulta para selecionar os carros alugados por um cliente em um período específico
-$sql = "SELECT c.modelo, c.ano, c.cor, a.data_inicio, a.data_fim
+$sql = "SELECT c.modelo, c.cor_carro, a.data_inicio, a.data_fim
         FROM alugueis a
         INNER JOIN carros c ON a.carro_id = c.id
         WHERE a.cliente_id = :cliente_id
@@ -82,7 +82,6 @@ $alugueis = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <thead>
                 <tr>
                     <th>Modelo</th>
-                    <th>Ano</th>
                     <th>Cor</th>
                     <th>Data de Início</th>
                     <th>Data de Fim</th>
@@ -92,8 +91,7 @@ $alugueis = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php foreach ($alugueis as $aluguel): ?>
                     <tr>
                         <td><?php echo $aluguel['modelo']; ?></td>
-                        <td><?php echo $aluguel['ano']; ?></td>
-                        <td><?php echo $aluguel['cor']; ?></td>
+                        <td><?php echo $aluguel['cor_carro']; ?></td>
                         <td><?php echo $aluguel['data_inicio']; ?></td>
                         <td><?php echo $aluguel['data_fim']; ?></td>
                     </tr>
