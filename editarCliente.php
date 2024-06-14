@@ -47,17 +47,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "UPDATE clientes SET nome=:nome, email=:email, telefone=:telefone WHERE id=:id";
 
         if ($stmt = $pdo->prepare($sql)) {
-            // Vincula variáveis ​​à instrução preparada como parâmetros
-            $stmt->bindParam(":nome", $param_nome);
-            $stmt->bindParam(":email", $param_email);
-            $stmt->bindParam(":telefone", $param_telefone);
-            $stmt->bindParam(":id", $param_id);
-
-            // Define os parâmetros
-            $param_nome = $nome;
-            $param_email = $email;
-            $param_telefone = $telefone;
-            $param_id = $id;
+            // Vincula variáveis à instrução preparada como parâmetros
+            $stmt->bindParam(":nome", $nome);
+            $stmt->bindParam(":email", $email);
+            $stmt->bindParam(":telefone", $telefone);
+            $stmt->bindParam(":id", $id);
 
             // Tentativa de executar a declaração preparada
             if ($stmt->execute()) {
@@ -67,6 +61,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 echo "Algo deu errado. Por favor, tente novamente mais tarde.";
             }
+        } else {
+            echo "Não foi possível preparar a declaração SQL.";
         }
 
         // Fecha a declaração
@@ -82,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "SELECT * FROM clientes WHERE id = :id";
 
         if ($stmt = $pdo->prepare($sql)) {
-            // Vincula variáveis ​​à instrução preparada como parâmetros
+            // Vincula variáveis à instrução preparada como parâmetros
             $stmt->bindParam(":id", $param_id);
 
             // Define os parâmetros
@@ -128,24 +124,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div class="container">
         <h1>Editar Cliente</h1>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <input type="hidden" name="id" value="<?php echo $id; ?>">
-            <div <?php echo (!empty($nome_err)) ? 'has-error' : ''; ?>">
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . "?id=" . $_GET['id']; ?>" method="post">
+            <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
+            <div class="form-group <?php echo (!empty($nome_err)) ? 'has-error' : ''; ?>">
                 <label for="nome">Nome:</label>
                 <input type="text" id="nome" name="nome" value="<?php echo $nome; ?>">
-                <span><?php echo $nome_err; ?></span>
+                <span class="help-block"><?php echo $nome_err; ?></span>
             </div>
-            <div <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
+            <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" value="<?php echo $email; ?>">
-                <span><?php echo $email_err; ?></span>
+                <span class="help-block"><?php echo $email_err; ?></span>
             </div>
-            <div <?php echo (!empty($telefone_err)) ? 'has-error' : ''; ?>">
+            <div class="form-group <?php echo (!empty($telefone_err)) ? 'has-error' : ''; ?>">
                 <label for="telefone">Telefone:</label>
                 <input type="text" id="telefone" name="telefone" value="<?php echo $telefone; ?>">
-                <span><?php echo $telefone_err; ?></span>
+                <span class="help-block"><?php echo $telefone_err; ?></span>
             </div>
-            <button type="submit">Salvar Alterações</button>
+            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
             <a href="listarClientes.php" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
+</body>
+</html>

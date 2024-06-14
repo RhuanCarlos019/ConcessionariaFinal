@@ -44,20 +44,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verifica se não há erros de entrada antes de inserir no banco de dados
     if (empty($nome_err) && empty($email_err) && empty($cargo_err)) {
         // Prepara a declaração UPDATE
-        $sql = "UPDATE funcionarios SET nome=:nome, email=:email, cargo=:cargo WHERE id=:id";
+        $sql = "UPDATE funcionarios SET nome = :nome, email = :email, cargo = :cargo WHERE id = :id";
 
         if ($stmt = $pdo->prepare($sql)) {
-            // Vincula variáveis ​​à instrução preparada como parâmetros
-            $stmt->bindParam(":nome", $param_nome);
-            $stmt->bindParam(":email", $param_email);
-            $stmt->bindParam(":cargo", $param_cargo);
-            $stmt->bindParam(":id", $param_id);
-
-            // Define os parâmetros
-            $param_nome = $nome;
-            $param_email = $email;
-            $param_cargo = $cargo;
-            $param_id = $id;
+            // Vincula variáveis à instrução preparada como parâmetros
+            $stmt->bindParam(":nome", $nome);
+            $stmt->bindParam(":email", $email);
+            $stmt->bindParam(":cargo", $cargo);
+            $stmt->bindParam(":id", $id);
 
             // Tentativa de executar a declaração preparada
             if ($stmt->execute()) {
@@ -67,6 +61,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 echo "Algo deu errado. Por favor, tente novamente mais tarde.";
             }
+        } else {
+            echo "Não foi possível preparar a declaração SQL.";
         }
 
         // Fecha a declaração
@@ -82,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "SELECT * FROM funcionarios WHERE id = :id";
 
         if ($stmt = $pdo->prepare($sql)) {
-            // Vincula variáveis ​​à instrução preparada como parâmetros
+            // Vincula variáveis à instrução preparada como parâmetros
             $stmt->bindParam(":id", $param_id);
 
             // Define os parâmetros
@@ -128,8 +124,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div class="container">
         <h1>Editar Funcionário</h1>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <input type="hidden" name="id" value="<?php echo $id; ?>">
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . "?id=" . $_GET['id']; ?>" method="post">
+            <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
             <div class="form-group <?php echo (!empty($nome_err)) ? 'has-error' : ''; ?>">
                 <label>Nome</label>
                 <input type="text" name="nome" class="form-control" value="<?php echo $nome; ?>">
